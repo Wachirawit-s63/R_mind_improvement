@@ -8,7 +8,10 @@ import { downloadFile } from "../../../methods/assistFunctions";
 import mindmapExporter from "../../../methods/mindmapExporter";
 import { Highlight, ButtonSet } from "../common/styledComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePowerpoint } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilePowerpoint,
+  faFileDownload,
+} from "@fortawesome/free-solid-svg-icons";
 // import pptxgen from "pptxgenjs";
 import ToggleSwitch from "../../Switch/ToggleSwitch";
 import ManualExport from "./ManualExport";
@@ -71,6 +74,12 @@ const Export = ({ handleClosePopup, displayMan, setDisplayMan }) => {
       setDisplayMan(true);
     }
   };
+  const handleDownload = () => {
+    const url = `data:text/plain,${encodeURIComponent(
+      JSON.stringify(mindmap)
+    )}`;
+    downloadFile(url, `${title}.json`);
+  };
   return (
     <div>
       {!displayMan ? (
@@ -125,6 +134,22 @@ const Export = ({ handleClosePopup, displayMan, setDisplayMan }) => {
             >
               <i className={"zwicon-file-table"} />
               Markdown（.md）
+            </li>
+            <li style={{ display: "inline-flex", width: "100%" }}>
+              <div
+                style={{ width: "100%", flex: 1, paddingTop: "2px" }}
+                onClick={handleDownload}
+              >
+                <FontAwesomeIcon
+                  icon={faFileDownload}
+                  style={{
+                    fontSize: "26px",
+                    marginLeft: "4px",
+                    marginRight: "15px",
+                  }}
+                ></FontAwesomeIcon>
+                JSON file (.json)
+              </div>
             </li>
             <li
               onClick={() => {
