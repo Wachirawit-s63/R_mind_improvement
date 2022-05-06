@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { context } from "../../../context";
 import { setTitle } from "../../../context/reducer/global/actionCreator";
 import useMindmap from "../../../customHooks/useMindmap";
@@ -22,6 +22,8 @@ const New = ({ handleClosePopup, handleDownload }) => {
     setMindmap(defaultMindmap, true);
     dispatch(setTitle(refer.DEFAULT_TITLE));
     handleClosePopup();
+    localStorage.removeItem("check");
+    localStorage.removeItem("disable");
   };
 
   return (

@@ -141,6 +141,8 @@ const Mindmap = ({ container_ref }) => {
     hDispatch(
       setHistory(mindmap_json, nodeStatus.cur_select || nodeStatus.cur_edit)
     );
+    localStorage.removeItem("check");
+    localStorage.removeItem("disable");
   }, [mindmap_json]);
 
   return (

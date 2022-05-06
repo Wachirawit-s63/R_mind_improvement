@@ -79,6 +79,21 @@ const ManualExport = ({ handleClosePopup }) => {
     onChangeSearchList(refreshSearchList(keyword, mindmap));
     setCursor(0);
   }, [keyword]);
+  useEffect(() => {
+    if (checkedState && disableState) {
+      localStorage.setItem("check", JSON.stringify(checkedState));
+      localStorage.setItem("disable", JSON.stringify(disableState));
+    }
+  }, [checkedState, disableState]);
+  useEffect(() => {
+    if (
+      JSON.parse(localStorage.getItem("check")) &&
+      JSON.parse(localStorage.getItem("disable"))
+    ) {
+      setCheckedState(JSON.parse(localStorage.getItem("check")));
+      setDisableState(JSON.parse(localStorage.getItem("disable")));
+    }
+  }, []);
 
   const changeCursorIndex = (adder) => {
     if (cursor === 0 && adder === -1) {
